@@ -3,7 +3,7 @@
 @implementation CallNumberPlugin
 
 + (BOOL)available {
-    return [[UIApplication sharedApplicaiton] canOpenURL:[NSURL URLWithString:@"tel://"]];
+    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel://"]];
 }
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -26,7 +26,7 @@
     if(![CallNumberPlugin available]) {
       result([FlutterError errorWithCode:@"NoFeatureCallSupported" message:nil details:nil]);
     }
-    else if(![[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]] {
+    else if(![[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]]) {
       result([FlutterError errorWithCode:@"CouldNotCallPhoneNumber" message:nil details:nil]);
     }
     result(@YES);
