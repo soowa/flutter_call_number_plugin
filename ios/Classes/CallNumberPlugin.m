@@ -17,7 +17,6 @@
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([@"callNumber" isEqualToString:call.method]) {
     NSString* number = call.arguments[@"number"];
-    number = [number stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
     if( ! [number hasPrefix:@"tel:"]){
       number = [NSString stringWithFormat:@"tel:%@", number];
@@ -29,7 +28,7 @@
     else if(![[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]]) {
       result([FlutterError errorWithCode:@"CouldNotCallPhoneNumber" message:nil details:nil]);
     }
-    result(@YES);
+    result(number);
   } else {
     result(FlutterMethodNotImplemented);
   }
